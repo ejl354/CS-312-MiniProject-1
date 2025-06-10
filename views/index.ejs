@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Blog</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <h1>Blog</h1>
+
+  <form action="/create" method="POST" class="create-form">
+    <input type="text" name="author" placeholder="Name" required>
+    <input type="text" name="title" placeholder="Title" required>
+    <textarea name="content" placeholder="Content" required></textarea>
+    <button type="submit">Post</button>
+  </form>
+
+  <% if (posts.length === 0) { %>
+    <p>No posts yet!</p>
+  <% } else { %>
+    <% posts.slice().reverse().forEach(post => { %>
+      <div class="post">
+        <h2><%= post.title %></h2>
+        <p><%= post.content %></p>
+        <p class="meta">By <%= post.author %> at <%= post.createdAt.toLocaleString() %></p>
+        <a href="/posts/<%= post.id %>/edit">Edit</a>
+        <form action="/posts/<%= post.id %>/delete" method="POST" style="display:inline;">
+          <button type="submit">Delete</button>
+        </form>
+      </div>
+    <% }) %>
+  <% } %>
+</body>
+</html>

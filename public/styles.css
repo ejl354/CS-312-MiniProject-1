@@ -1,0 +1,61 @@
+body {
+  font-family: Consolas;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #c08cf1;
+}
+
+h1 {
+  text-align: center;
+}
+
+.create-form,
+.edit-form {
+  font-family: Consolas;
+  margin-bottom: 30px;
+  padding: 20px;
+  background: #9660dd;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px #e4c23b64;
+}
+
+.create-form input,
+.edit-form input,
+.create-form textarea,
+.edit-form textarea {
+  font-family: Consolas;
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  font-size: 1em;
+}
+
+button {
+  font-family: Consolas;
+  padding: 10px 15px;
+  background: #c982ea;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #8103b7;
+}
+
+.post {
+  font-family: Consolas;
+  background: #8758df;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px #fff71851;
+}
+
+.meta {
+  font-size: 0.9em;
+  color: #fffbfb;
+}
