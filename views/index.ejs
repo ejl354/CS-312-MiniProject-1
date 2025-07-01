@@ -7,7 +7,7 @@
 <body>
   <h1>Blog</h1>
 
-  <!-- User login status and navigation -->
+  
   <% if (user) { %>
     <p>Welcome, <%= user.name %>! <a href="/logout">Logout</a></p>
     <p><a href="/create">Create New Post</a></p>
@@ -15,7 +15,7 @@
     <p><a href="/signin">Sign In</a> or <a href="/signup">Sign Up</a></p>
   <% } %>
 
-  <!-- Create Post Form (show only if logged in) -->
+  
   <% if (user) { %>
     <form action="/create" method="POST" class="create-form">
       <input type="text" name="title" placeholder="Title" required>
@@ -33,7 +33,7 @@
         <p><%= post.body %></p>
         <p class="meta">By <%= post.creator_name %> at <%= new Date(post.date_created).toLocaleString() %></p>
 
-        <!-- Edit/Delete only if logged-in user is the creator -->
+        
         <% if (user && user.user_id === post.creator_user_id) { %>
           <a href="/posts/<%= post.blog_id %>/edit">Edit</a>
           <form action="/posts/<%= post.blog_id %>/delete" method="POST" style="display:inline;">
