@@ -54,7 +54,21 @@ button:hover {
   border-radius: 8px;
   box-shadow: 0 2px 4px #fff71851;
 }
+.error {
+  color: #ff4c4c; 
+  font-weight: bold;
+  margin-bottom: 15px;
+}
 
+a {
+  color: #d0c1ee;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #d0ec5f;
+}
 .meta {
   font-size: 0.9em;
   color: #fffbfb;

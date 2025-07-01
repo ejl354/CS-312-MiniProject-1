@@ -7,11 +7,12 @@
 <body>
   <h1>Edit Blog Post</h1>
 
-  <form action="/posts/<%= post.id %>/edit" method="POST" class="edit-form">
+  <form action="/posts/<%= post.blog_id %>/edit" method="POST" class="edit-form">
     <input type="text" name="title" value="<%= post.title %>" required>
-    <textarea name="content" required><%= post.content %></textarea>
+    <textarea name="content" required><%= post.body %></textarea>
     <button type="submit">Update</button>
     <a href="/">Cancel</a>
   </form>
 </body>
 </html>
+
