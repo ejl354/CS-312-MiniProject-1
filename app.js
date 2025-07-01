@@ -4,7 +4,7 @@ const { Pool } = require('pg');
 const bodyParser = require('body-parser');
 const app = express();
 
-// PostgreSQL connection pool
+// PostgreSQL pool
 const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
@@ -13,19 +13,19 @@ const pool = new Pool({
   port: 5432,
 });
 
-// Set up EJS and static files
+// EJS
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-// Session setup
+
 app.use(session({
   secret: 'beep', // Change this to a strong secret in production!
   resave: false,
   saveUninitialized: false,
 }));
 
-// Middleware to require login
+
 function requireLogin(req, res, next) {
   if (!req.session.user) {
     return res.redirect('/signin');
@@ -33,14 +33,14 @@ function requireLogin(req, res, next) {
   next();
 }
 
-// =================== AUTH ROUTES ===================
+// signup stuff
 
-// GET: Signup page
+// Sighup page
 app.get('/signup', (req, res) => {
   res.render('signup', { error: null });
 });
 
-// POST: Handle signup
+
 app.post('/signup', async (req, res) => {
   const { user_id, password, name } = req.body;
   try {
@@ -59,12 +59,12 @@ app.post('/signup', async (req, res) => {
   }
 });
 
-// GET: Signin page
+
 app.get('/signin', (req, res) => {
   res.render('signin', { error: null });
 });
 
-// POST: Handle signin
+
 app.post('/signin', async (req, res) => {
   const { user_id, password } = req.body;
   try {
@@ -86,16 +86,16 @@ app.post('/signin', async (req, res) => {
   }
 });
 
-// GET: Logout
+//Logout
 app.get('/logout', (req, res) => {
   req.session.destroy(() => {
     res.redirect('/signin');
   });
 });
 
-// =================== BLOG ROUTES ===================
+// Blog stuffffs
 
-// GET: Homepage - show all blog posts
+// Homepage 
 app.get('/', async (req, res) => {
   try {
     const result = await pool.query('SELECT * FROM blogs ORDER BY date_created DESC');
@@ -106,12 +106,12 @@ app.get('/', async (req, res) => {
   }
 });
 
-// GET: Form to create new post (only logged in users)
+ 
 app.get('/create', requireLogin, (req, res) => {
   res.render('create', { user: req.session.user, error: null });
 });
 
-// POST: Create new post
+// new post
 app.post('/create', requireLogin, async (req, res) => {
   const { title, content } = req.body;
   try {
@@ -127,7 +127,7 @@ app.post('/create', requireLogin, async (req, res) => {
   }
 });
 
-// GET: Edit post form (only creator)
+// Edit logged in
 app.get('/posts/:id/edit', requireLogin, async (req, res) => {
   const postId = req.params.id;
   try {
@@ -144,7 +144,7 @@ app.get('/posts/:id/edit', requireLogin, async (req, res) => {
   }
 });
 
-// POST: Update post (only creator)
+//Update post logged in
 app.post('/posts/:id/edit', requireLogin, async (req, res) => {
   const postId = req.params.id;
   const { title, content } = req.body;
@@ -166,7 +166,7 @@ app.post('/posts/:id/edit', requireLogin, async (req, res) => {
   }
 });
 
-// POST: Delete post (only creator)
+//Delete post logged in
 app.post('/posts/:id/delete', requireLogin, async (req, res) => {
   const postId = req.params.id;
   try {
@@ -184,7 +184,7 @@ app.post('/posts/:id/delete', requireLogin, async (req, res) => {
   }
 });
 
-// =================== START SERVER ===================
+
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
